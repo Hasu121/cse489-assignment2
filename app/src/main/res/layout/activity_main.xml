@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.Material3.ActionBar"
             app:title="Assignment 2"
             app:titleTextColor="@android:color/white" />
 

@@ -36,7 +36,8 @@
             android:text="Message will appear here"
             android:textAlignment="center"
             android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/btnBackFromReceiver"

@@ -19,8 +19,7 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
-        <Text
-            View
+        <TextView
             android:id="@+id/tvBroadcastLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

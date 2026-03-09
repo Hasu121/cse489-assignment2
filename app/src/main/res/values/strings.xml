@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Assignment 2</string>
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
 
     <string-array name="broadcast_options">
         <item>Custom broadcast receiver</item>

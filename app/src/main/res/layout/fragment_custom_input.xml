@@ -10,12 +10,12 @@
         android:padding="24dp">
 
         <TextView
-            android:id="@+id/tvCustomTile"
-            android:layout_width="169dp"
-            android:layout_height="37dp"
+            android:id="@+id/tvCustomTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Custom Broadcast"
-            android:textSize="16sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnSendBroadcast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
