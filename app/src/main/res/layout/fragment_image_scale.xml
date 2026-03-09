@@ -35,8 +35,8 @@
         android:id="@+id/tvImageHelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="Pinch to zoom in and out"
+        android:layout_marginTop="16dp"
+        android:text="Use two fingers to zoom"
         android:textSize="16sp" />
 
 </LinearLayout>

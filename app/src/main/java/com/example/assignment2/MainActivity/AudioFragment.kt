@@ -16,7 +16,6 @@ class AudioFragment : Fragment(R.layout.fragment_audio) {
 
         val btnPlay = view.findViewById<Button>(R.id.btnPlayAudio)
         val btnPause = view.findViewById<Button>(R.id.btnPauseAudio)
-        val btnStop = view.findViewById<Button>(R.id.btnStopAudio)
         val btnReset = view.findViewById<Button>(R.id.btnResetAudio)
 
 
@@ -33,11 +32,6 @@ class AudioFragment : Fragment(R.layout.fragment_audio) {
             }
         }
 
-        btnStop.setOnClickListener {
-            mediaPlayer?.stop()
-            mediaPlayer?.release()
-            mediaPlayer = MediaPlayer.create(requireContext(), R.raw.sample_audio)
-        }
 
         btnReset.setOnClickListener {
             mediaPlayer?.seekTo(0)
@@ -45,6 +39,7 @@ class AudioFragment : Fragment(R.layout.fragment_audio) {
             mediaPlayer?.stop()
             mediaPlayer?.release()
             mediaPlayer = MediaPlayer.create(requireContext(), R.raw.sample_audio)
+            mediaPlayer?.start()
         }
 
     }

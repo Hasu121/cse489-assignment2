@@ -1,10 +1,10 @@
 package com.example.assignment2
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.Button
@@ -14,10 +14,11 @@ import androidx.fragment.app.Fragment
 
 class ImageScaleFragment : Fragment(R.layout.fragment_image_scale) {
 
-    private var scaleFactor = 1.0f
-    private lateinit var scaleGestureDetector: ScaleGestureDetector
     private lateinit var imageView: ImageView
     private lateinit var btnPickImage: Button
+    private lateinit var scaleGestureDetector: ScaleGestureDetector
+
+    private var scaleFactor = 1.0f
 
     private val imagePickerLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -31,6 +32,7 @@ class ImageScaleFragment : Fragment(R.layout.fragment_image_scale) {
             }
         }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,7 +49,7 @@ class ImageScaleFragment : Fragment(R.layout.fragment_image_scale) {
             object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
                 override fun onScale(detector: ScaleGestureDetector): Boolean {
                     scaleFactor *= detector.scaleFactor
-                    scaleFactor = scaleFactor.coerceIn(0.5f, 4.0f)
+                    scaleFactor = scaleFactor.coerceIn(0.8f, 3.0f)
 
                     imageView.scaleX = scaleFactor
                     imageView.scaleY = scaleFactor
@@ -56,16 +58,8 @@ class ImageScaleFragment : Fragment(R.layout.fragment_image_scale) {
             }
         )
 
-        imageView.setOnTouchListener { v, event ->
+        imageView.setOnTouchListener { _, event ->
             scaleGestureDetector.onTouchEvent(event)
-
-            when (event.actionMasked) {
-                MotionEvent.ACTION_DOWN,
-                MotionEvent.ACTION_POINTER_DOWN -> v.parent.requestDisallowInterceptTouchEvent(true)
-
-                MotionEvent.ACTION_UP,
-                MotionEvent.ACTION_CANCEL -> v.parent.requestDisallowInterceptTouchEvent(false)
-            }
             true
         }
     }

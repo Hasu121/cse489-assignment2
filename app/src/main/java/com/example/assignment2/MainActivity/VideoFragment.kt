@@ -1,5 +1,6 @@
 package com.example.assignment2
 
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -15,10 +16,14 @@ class VideoFragment : Fragment(R.layout.fragment_video) {
         val videoView = view.findViewById<VideoView>(R.id.videoView)
         val btnPlay = view.findViewById<Button>(R.id.btnPlayVideo)
         val btnPause = view.findViewById<Button>(R.id.btnPauseVideo)
-        val btnStop = view.findViewById<Button>(R.id.btnStopVideo)
+        val btnReset = view.findViewById<Button>(R.id.btnResetVideo)
 
         val videoUri = Uri.parse("android.resource://${requireContext().packageName}/${R.raw.sample_video}")
         videoView.setVideoURI(videoUri)
+
+        videoView.setOnPreparedListener { mediaPlayer: MediaPlayer ->
+            mediaPlayer.setVolume(1.0f, 1.0f)
+        }
 
         btnPlay.setOnClickListener {
             videoView.start()
@@ -30,9 +35,10 @@ class VideoFragment : Fragment(R.layout.fragment_video) {
             }
         }
 
-        btnStop.setOnClickListener {
+        btnReset.setOnClickListener {
             videoView.stopPlayback()
             videoView.setVideoURI(videoUri)
+            videoView.start()
         }
     }
 }
