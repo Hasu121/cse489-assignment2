@@ -2,9 +2,9 @@ package com.example.assignment2
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.Button
@@ -18,14 +18,16 @@ class ImageScaleFragment : Fragment(R.layout.fragment_image_scale) {
     private lateinit var scaleGestureDetector: ScaleGestureDetector
     private lateinit var imageView: ImageView
     private lateinit var btnPickImage: Button
-    private var selectedImageUri: Uri? = null
 
     private val imagePickerLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                selectedImageUri = data?.data
+                val selectedImageUri = result.data?.data
                 imageView.setImageURI(selectedImageUri)
+
+                scaleFactor = 1.0f
+                imageView.scaleX = 1.0f
+                imageView.scaleY = 1.0f
             }
         }
 
@@ -45,7 +47,7 @@ class ImageScaleFragment : Fragment(R.layout.fragment_image_scale) {
             object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
                 override fun onScale(detector: ScaleGestureDetector): Boolean {
                     scaleFactor *= detector.scaleFactor
-                    scaleFactor = scaleFactor.coerceIn(0.5f, 3.0f)
+                    scaleFactor = scaleFactor.coerceIn(0.5f, 4.0f)
 
                     imageView.scaleX = scaleFactor
                     imageView.scaleY = scaleFactor
@@ -54,8 +56,16 @@ class ImageScaleFragment : Fragment(R.layout.fragment_image_scale) {
             }
         )
 
-        imageView.setOnTouchListener { _, event ->
+        imageView.setOnTouchListener { v, event ->
             scaleGestureDetector.onTouchEvent(event)
+
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN,
+                MotionEvent.ACTION_POINTER_DOWN -> v.parent.requestDisallowInterceptTouchEvent(true)
+
+                MotionEvent.ACTION_UP,
+                MotionEvent.ACTION_CANCEL -> v.parent.requestDisallowInterceptTouchEvent(false)
+            }
             true
         }
     }
